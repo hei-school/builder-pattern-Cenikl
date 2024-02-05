@@ -1,0 +1,19 @@
+version: 2.1
+
+jobs:
+  CI:
+    docker:
+      - image: maven:3.9.6
+    steps:
+      - checkout
+      - run:
+          name: Checking linting
+          command: mvn clean validate
+      - run:
+          name: Testing
+          command: mvn test
+workflows:
+  version: 2
+  build:
+    jobs:
+      - CI
